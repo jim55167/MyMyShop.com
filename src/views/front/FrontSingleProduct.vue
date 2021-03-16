@@ -189,40 +189,50 @@ export default {
       if (this.product.num > 1) {
         this.product.num--
       }
-      localStorage.setItem('myCart', JSON.stringify(this.cartData))
     },
     quantityPlus () {
       if (this.product.num < 15) {
         this.product.num++
       }
-      localStorage.setItem('myCart', JSON.stringify(this.cartData))
     },
     randomProduct (arr, num) {
       const newArr = []
       if (arr.length <= num) {
         num = arr.length
       }
-
-      rand(num)
-      function rand (selectQty) {
-        if (selectQty === 0) {
-          return false
-        }
+      for (let i = 0; i < num; i++) {
         const index = Math.floor(Math.random() * arr.length)
-        let flag = true
-        newArr.forEach((item) => {
-          if (item === arr[index]) {
-            flag = false
-          }
-        })
-        if (flag) {
-          newArr.push(arr[index])
-          selectQty--
-        }
-        rand(selectQty)
+        console.log(index)
+        newArr.push(arr[index])
       }
       this.recommandProducts = newArr
     }
+    // randomProduct (arr, num) {
+    //   const newArr = []
+    //   if (arr.length <= num) {
+    //     num = arr.length
+    //   }
+
+    //   rand(num)
+    //   function rand (selectQty) {
+    //     if (selectQty === 0) {
+    //       return false
+    //     }
+    //     const index = Math.floor(Math.random() * arr.length)
+    //     let flag = true
+    //     newArr.forEach((item) => {
+    //       if (item === arr[index]) {
+    //         flag = false
+    //       }
+    //     })
+    //     if (flag) {
+    //       newArr.push(arr[index])
+    //       selectQty--
+    //     }
+    //     rand(selectQty)
+    //   }
+    //   this.recommandProducts = newArr
+    // }
   },
   computed: {
     isLoading () {
@@ -234,9 +244,7 @@ export default {
   },
   created () {
     this.productId = this.$route.params.productID
-    this.localProducts = JSON.parse(
-      localStorage.getItem('filteredList')
-    )
+    this.localProducts = JSON.parse(localStorage.getItem('filteredList'))
     this.getSingleProduct()
     this.getCart()
   },

@@ -52,7 +52,7 @@ export default {
         username: '',
         password: ''
       },
-      seen: '',
+      seen: false,
       pwdType: 'password',
       userPassword: '',
       openEyes: require('@/assets/calendar/open.png'),
