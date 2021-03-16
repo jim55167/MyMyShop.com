@@ -202,37 +202,10 @@ export default {
       }
       for (let i = 0; i < num; i++) {
         const index = Math.floor(Math.random() * arr.length)
-        console.log(index)
         newArr.push(arr[index])
       }
       this.recommandProducts = newArr
     }
-    // randomProduct (arr, num) {
-    //   const newArr = []
-    //   if (arr.length <= num) {
-    //     num = arr.length
-    //   }
-
-    //   rand(num)
-    //   function rand (selectQty) {
-    //     if (selectQty === 0) {
-    //       return false
-    //     }
-    //     const index = Math.floor(Math.random() * arr.length)
-    //     let flag = true
-    //     newArr.forEach((item) => {
-    //       if (item === arr[index]) {
-    //         flag = false
-    //       }
-    //     })
-    //     if (flag) {
-    //       newArr.push(arr[index])
-    //       selectQty--
-    //     }
-    //     rand(selectQty)
-    //   }
-    //   this.recommandProducts = newArr
-    // }
   },
   computed: {
     isLoading () {
