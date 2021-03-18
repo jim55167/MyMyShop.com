@@ -200,10 +200,18 @@ export default {
       if (arr.length <= num) {
         num = arr.length
       }
+      const arrIndex = []
+      const randomIndex = []
+      arr.forEach((item, index) => {
+        arrIndex.push(index)
+      })
       for (let i = 0; i < num; i++) {
-        const index = Math.floor(Math.random() * arr.length)
-        newArr.push(arr[index])
+        const index = Math.floor(Math.random() * arrIndex.length)
+        randomIndex.push((arrIndex.splice(index, 1)[0]))
       }
+      randomIndex.forEach(item => {
+        newArr.push(arr[item])
+      })
       this.recommandProducts = newArr
     }
   },
@@ -220,6 +228,7 @@ export default {
     this.localProducts = JSON.parse(localStorage.getItem('filteredList'))
     this.getSingleProduct()
     this.getCart()
+    console.log(this.recommandProducts)
   },
   components: {
     GoTop
