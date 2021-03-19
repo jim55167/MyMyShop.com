@@ -208,9 +208,7 @@ export default {
       })
       for (let i = 0; i < num; i++) {
         const numIndex = Math.floor(Math.random() * arrIndex.length)
-        console.log(numIndex)
         randomIndex.push((arrIndex.splice(numIndex, 1)[0]))
-        console.log(randomIndex)
       }
       randomIndex.forEach(item => {
         newArr.push(arr[item])
