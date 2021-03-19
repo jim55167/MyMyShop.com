@@ -98,7 +98,7 @@
 
 import GoTop from '@/components/GoTop'
 import axios from 'axios'
-
+import $ from 'jquery'
 export default {
   data () {
     return {
@@ -200,16 +200,16 @@ export default {
       if (arr.length <= num) {
         num = arr.length
       }
+      $('html, body').animate({ scrollTop: 0 }, 600)
       const arrIndex = []
       const randomIndex = []
       arr.forEach((item, index) => {
         arrIndex.push(index)
       })
       for (let i = 0; i < num; i++) {
-        const index = Math.floor(Math.random() * arrIndex.length)
-        console.log(index)
-        randomIndex.push((arrIndex.splice(index, 1)[0]))
-        console.log(randomIndex.push((arrIndex.splice(index, 1)[0])))
+        const numIndex = Math.floor(Math.random() * arrIndex.length)
+        console.log(numIndex)
+        randomIndex.push((arrIndex.splice(numIndex, 1)[0]))
         console.log(randomIndex)
       }
       randomIndex.forEach(item => {
