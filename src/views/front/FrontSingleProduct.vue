@@ -42,7 +42,7 @@
 
             <div class="buy-option">
               <input type="button" class="btn btn-primary mr-1percent" @click="addToCart(product.id, true, product.num)" value="馬上購買">
-              <input type="button" class="btn btn-danger" @click="addToCart(product.id, false, product.num)" value="加入購物車">
+              <input type="button" class="btn btn-danger" :disabled="disabled" @click="addToCart(product.id, false, product.num)" value="加入購物車">
             </div>
           </div>
         </div>
@@ -108,8 +108,7 @@ export default {
       product: {
         num: 1
       },
-      isDisable: false,
-      flag: false
+      disabled: false
     }
   },
 
@@ -146,7 +145,7 @@ export default {
       this.$store.dispatch('getCart')
     },
     addToCart (id, direct, qty = 1) {
-      if (this.flag) {
+      if (this.disabled) {
         return
       }
       const addApi = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
@@ -160,7 +159,7 @@ export default {
           qty
         }
         if (cartProducts.length > 0) {
-          this.flag = true
+          this.disabled = true
           const totalNum = cartProducts[0].qty
           cart = {
             product_id: id,
@@ -169,11 +168,11 @@ export default {
           const deleteApi = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${cartProducts[0].id}`
           Promise.all([axios.post(addApi, { data: cart }), axios.delete(deleteApi)])
             .then(() => {
-              this.flag = false
+              this.disabled = false
             })
         } else if (cartProducts.length === 0) {
           this.$http.post(addApi, { data: cart }).then(response => {
-            this.flag = false
+            this.disabled = false
             if (response.data.success) {
               this.$store.dispatch('getCart')
               this.$store.dispatch('updateLoading', false)
